@@ -10,6 +10,12 @@ export default function Tracks ({tracks, handleAddButton}) {
 
     return (
         <div className="flex flex-col gap-4 text-white">
+            {tracks.length === 0 && (
+                <div className="flex items-center justify-around gap-4 bg-[#1e1e3a] rounded-lg p-3 w-100 h-150">
+                    <h1 className="font-bold">Search Something</h1>
+                </div>
+            )}
+
             {tracks.map(track => (
                 <div
                 key={track.id}
@@ -24,23 +30,9 @@ export default function Tracks ({tracks, handleAddButton}) {
                         <span className="text-sm font-semibold text-white">{track.name}</span>
                         <span className="text-sm text-gray-300">{track.artist}</span>
                         <span className="text-xs text-gray-500 italic">{track.album}</span>
-
-                        {track.preview_url ? (
-                        <audio
-                            controls
-                            src={track.preview_url}
-                            className="mt-2 w-40"
-                        >
-                            Your browser does not support the audio element.
-                        </audio>
-                        ) : (
-                        <span className="text-[10px] text-gray-600 mt-2">
-                            No preview available
-                        </span>
-                        )}
                     </div>
 
-                    <button className="cursor-pointer px-4" onClick={() => handleAddButton(track.name, track.id)}><img src="public/add.svg" alt="add button" className="w-5" /></button>
+                    <button className="cursor-pointer px-4 hover:scale-110 duration-100" onClick={() => handleAddButton(track)}><img src="public/add.svg" alt="add button" className="w-5" /></button>
 
                 </div>
             ))}

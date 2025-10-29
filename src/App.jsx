@@ -2,12 +2,27 @@ import { useState } from 'react'
 import Search from './components/Search'
 import getTracks from './services/search'
 import Tracks from './components/Tracks'
+import Playlist from './components/Playlist'
 
 function App() {
   const [tracks, setTracks] = useState([])
+  const [playlist, setPlaylist] = useState([])
 
-  function handleAddButton (name, id){
-    console.log('Añadido a favoritos: \n', 'Nombre: ', name, '\n Id: ', id)
+  function handleAddButton (track){
+    const exist = playlist.find(fav => fav.id === track.id)
+
+    if(exist){
+      console.log(track.name , 'Ya existe en la playlist')
+      return
+    }
+
+    setPlaylist(prev => [...prev , track])
+    console.log(playlist)
+  }
+
+  function handleRemoveButton(track){
+    const updatedPlaylist = playlist.filter(fav => fav.id !== track.id) 
+    setPlaylist(updatedPlaylist)
   }
 
   console.log(tracks)
@@ -20,7 +35,7 @@ function App() {
       <Search getTracks={getTracks} setTracks={setTracks}/>
       <div className='flex flex-row gap-4'> 
         <Tracks tracks={tracks} handleAddButton={handleAddButton}/>
-        
+        <Playlist playlist={playlist} handleRemoveButton={handleRemoveButton}/>
       </div>
     </div>
   )
