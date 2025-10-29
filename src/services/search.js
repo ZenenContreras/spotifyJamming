@@ -1,4 +1,4 @@
-const token='BQBPFsErzdzOhmSeADKyYgTvbGkI5ZnUKk9zgYsyDIBHQemXOqK0cI2TC6VFwPagtvl4Gzhj9S5TQLjYPsMOjt7LDaQXtXJE1HbKDsjnd0KuOByei7uRr61IONhUJUNihTXv5yCyTMU'
+const token='BQDmN9wwYYNSiVSGmbupvTYYU7rCZjfHjfWozbrcs0cS2WnaSKN9J-wiv6teWdGNTvTfg6dI_-5txlv5D_SDwG8aC9OW8JpA55kutx7dvWJpJMua3H3MFpWCE53mZKdvCkhoU__l77w'
 
 async function fetchWebApi (endpoint, method, body) {
 
@@ -29,8 +29,6 @@ async function getTracks(query) {
         'GET'
     );
 
-    console.log('data from Spotify:', data);
-
     if (!data || !data.tracks || !data.tracks.items) {
         return [];
     }
@@ -46,6 +44,7 @@ async function getTracks(query) {
         '',
         preview_url: track.preview_url,
         external_url: track.external_urls?.spotify,
+        uri: track.uri
     }));
 
     return simplified;

@@ -1,4 +1,4 @@
-export default function Tracks ({tracks}) {
+export default function Tracks ({tracks, handleAddButton}) {
 
     if(tracks === 0 || !tracks){
         return (
@@ -39,9 +39,9 @@ export default function Tracks ({tracks}) {
                         </span>
                         )}
                     </div>
-                    <div className="">
-                        <button className="cursor-pointer"><img src="public/add.svg" alt="add button" className="w-5" /></button>
-                    </div>
+
+                    <button className="cursor-pointer px-4" onClick={() => handleAddButton(track.name, track.id)}><img src="public/add.svg" alt="add button" className="w-5" /></button>
+
                 </div>
             ))}
         </div>
